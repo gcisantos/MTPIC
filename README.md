@@ -377,4 +377,4 @@ O link utilizado foi: https://www.ebiografia.com/thomas_edison/
 
 
 Resultado do processamento<br>
-![Resultado.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/1.png)
+![Resultado.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/9.png)
