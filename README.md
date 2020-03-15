@@ -41,8 +41,12 @@
     <li>VisJs</li>    
 </ul>
 
+As ferramentas podem ser instaladas através do PIP, somente o Tesseract e o NLTK que precisam de passos a mais, conforme citado abaixo. No caso do VisJs é uma bilioteca utilziada para interface gráfica no HTML.
+
 Pytesseract necessita do arquivo executavel para funcionar. No meu meu caso o mesmo encontra-se 
+
 C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe
+
 O programa utilizado encontra-se junto ao fonte com o nome de Tesseract-OCR.7z, basta descompactar no local citado acima.
 
 Instalação NLTK<br>
@@ -50,9 +54,7 @@ Python<br>
     >>Import nltk<br>
     nltk.download()
     
-    Fazer de tudo
-
-<b>
+    
 
 <h3>Estrutura da aplicação</h3>
 
@@ -243,13 +245,13 @@ Quando o servidor for iniciado será exibida a seguinte mensagem.
 
 
 <br>
-<b>
-Quantidade de sentenças a processar: 1
-Tempo estimado: 2.25s
 
-Servidor iniciado em : 2.8890669345855713
-Tempo: 2020-02-06 17:00:14.792936
-</b>
+<b>Quantidade de sentenças a processar: 1</b>
+<b>Tempo estimado: 2.25s</b>
+
+<b>Servidor iniciado em : 2.8890669345855713</b>
+<b>Tempo: 2020-02-06 17:00:14.792936</b>
+
 
 Após serviço estar inciado podemos fazer uso através da interface gráfica, ou através de scripts que se comuniquem diretamente com a aplicação.
 
@@ -273,16 +275,16 @@ Novamente, coma trata-se de um serviço não podemos executar pelo jupyter.
 Após o server estar iniciado, teremos uma mensagem conforme abaixo:
 
 
-<b>
-Performing system checks...
 
-System check identified no issues (0 silenced).
-February 06, 2020 - 17:06:33
-Django version 2.1.2, using settings 'MTPIC.settings'
-Starting development server at http://127.0.0.1:8000/
-Quit the server with CTRL-BREAK.
+<b>Performing system checks...</b><br>
 
-</b>
+<b>System check identified no issues (0 silenced).</b><br>
+<b>February 06, 2020 - 17:06:33</b><br>
+<b>Django version 2.1.2, using settings 'MTPIC.settings'</b><br>
+<b>Starting development server at http://127.0.0.1:8000/</b><br>
+<b>Quit the server with CTRL-BREAK.</b><br>
+
+
 
 Em seguida basta acessarmos o link informado para termos acesso a aplicação
 
@@ -301,7 +303,7 @@ A interface foi permite navegar entre as seguintes telas:
 <b>Visualizar Dados Processados:</b> Módulo responsável pela por permitir consultar o resultado de processos anteriores.<br><br>
 
 
-![image.png](attachment:image.png)
+![image.png](attachment:Imagens/1.png)
 
 <h4>Tela inicial</h4>
 
