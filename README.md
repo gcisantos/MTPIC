@@ -303,13 +303,13 @@ A interface foi permite navegar entre as seguintes telas:
 <b>Visualizar Dados Processados:</b> Módulo responsável pela por permitir consultar o resultado de processos anteriores.<br><br>
 
 
-![image.png](attachment:Imagens/1.png)
+![Modulos.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/1.png)
 
 <h4>Tela inicial</h4>
 
 A primeira tela do sistema contém um breve resumo do que foi feito, como funciona e as principais técnicas utilizadas.
 
-![image.png](attachment:image.png)
+![Tela_Inicial.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/2.png)
 
 
 
@@ -317,21 +317,21 @@ A primeira tela do sistema contém um breve resumo do que foi feito, como funcio
 
 Executa os processos de quebra de texto, transformando cada palavra em uma posição de um vetor. Esse processo é utilizado em todos os momentos da aplicação para que o sistema possa converter o texto em um formato interpretável pelo computador.
 
-![image.png](attachment:image.png)
+![Tokenizer.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/3.png)
 
 
 <h4>Remoção de Stopwords</h4>
 
 Executa os processos de limpeza do texto. Removendo as palavras que não agregam conteúdo semantico, ou seja, mesmo sem essas palavras ainda é possivel entender o sentido do texto.
 
-![image.png](attachment:image.png)
+![StopWords.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/4.png)
 
 
 <h4>Stemming</h4>
 
 Responsável também por realizar a limpeza do texto. Transformando as palavras em sua forma raiz. Esse processo faz uso dos dois processos anteriores.
 
-![image.png](attachment:image.png)
+![Stemming.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/5.png)
 
 
 <h4>Extratores de Conteúdo</h4>
@@ -356,12 +356,12 @@ Nesse projeto em questão a parte de coleta foi desenvolvida para permitir que f
 
 A tela principal do minerador permite a seleção do tipo de arquivo que deseja processar, assim como a taxa de assertividade que deseja obter. A taxa de assertividade serve como um limitador de o quão confiável você deseja obter de informação, ou quanto de abrângencia daquele assunto você dejese que o sistema encontre.
 
-![image.png](attachment:image.png)
+![Minerador.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/6.png)
 
 
 Os processos de extração de textos estão todos no arquivo D:\MTPIC\MTPIC\processamento\obtemTexto.py através dos métodos:
 
-![image.png](attachment:image.png)
+![Metodos.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/7.png)
 
 Após o texto ser extraído a aplicação grava o texto que deseja processar na base de dados. O processador que já estava em execução anterioremente, realiza a leitura do banco e processa o texto inserido. A aplicação fica aguardando o processador executar a mineração e ao fim o resultado é armazenado no banco de dados, onde a aplicação realiza uma nova consulta para obter um JSON com os temas encontrados.
 
@@ -373,8 +373,8 @@ Para esse exemplo foi utilizado a forma de extração através de link, onde o s
 
 O link utilizado foi: https://www.ebiografia.com/thomas_edison/
 
-![image.png](attachment:image.png)<br>
+![Processo.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/8.png)<br>
 
 
 Resultado do processamento<br>
-![image.png](attachment:image.png)
+![Resultado.png](https://raw.githubusercontent.com/gcisantos/MTPIC/master/Imagens/1.png)
