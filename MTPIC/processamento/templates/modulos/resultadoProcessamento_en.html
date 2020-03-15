@@ -1,0 +1,87 @@
+<!--Carrega o template padrão-->
+{% extends 'layout_en.html' %}
+
+<!--Bloco para inserir titulo da página-->
+{% block titulo%}MTPIC - View Result {% endblock %}
+
+<!--Bloco para inserir subTitulo da página-->
+{% block subTitulo%} View Result {% endblock%}
+
+<!--Realiza o  carregamento da pasta static-->
+{% load static %}
+
+<!--Realiza o  carregamento dos arquivos css-->
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/comum.css' %}" />
+
+<link rel="stylesheet" href="{% static 'css/vis.min.css' %}" />
+{% endblock %}
+
+{% block scripts%}
+<script src="{% static 'js/vis.min.js' %}"></script>
+<script src="{% static 'js/resultadoProcessamento_en.js' %}"></script>
+{% endblock%}
+
+<!--Bloco para inserção do conteudo da página-->
+{% block content %}
+
+<BR /> <BR /> <BR /> <BR /> <BR />
+<div class="row">
+    <div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+        <h5>
+            <span href="#" class="itemLista">View Result</span>
+        </h5>
+        <p class="tb1">This module allows the query of data already processed, by searching for the id of the processed item.</p>
+    </div>
+
+
+</div>
+
+<BR />
+
+<div class="row">
+    <div class="col-12 col-lg-6">
+        <!--Bloco para Descrição do processo que essa página realzia-->
+
+        <form id="formulario" name="formulario" action="" method="post">
+            {% csrf_token %}
+
+            <label for="idBusca">Enter id to view</label>
+            <input class="form-control" type="number" name="idBusca" id="idBusca" />
+            <br>
+            <div class="col-4">
+                <input type="button" class="btn btn-success" value="Process" name="processar" id="processar">
+            </div>
+    </div>
+    </form>
+
+
+</div>
+<div id="agrupaResultados">
+    <label for="resultado">Result in graph form:</label>
+    <br>
+    <br>
+    <div id="mynetwork"></div>
+    <label for="resultado">Result of the processed text:</label>
+    <br>
+    <br>
+    <div class="row">
+
+        <div id="resultado" class="col-sm-12 col-lg-5 resultado">
+            <h3 align="center">Central theme</h3>
+            <span id="temaCentral"><i>No data processed</i></span>
+
+        </div>
+
+        <div id="resultadoSub" class="col-sm-12  col-lg-5 offset-lg-1 resultado">
+            <h3 align="center">Concepts</h3>
+            <span id="subTema"><i>No data processed</i></span>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>
+{% endblock %}

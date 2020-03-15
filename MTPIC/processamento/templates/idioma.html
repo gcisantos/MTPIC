@@ -1,0 +1,75 @@
+{% load static %}
+<html>
+
+<head>
+    <title> Selecionar idioma</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/idioma.css' %}" />
+ 
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="{% static 'js/idioma.js' %}"></script>
+</head>
+
+<body style="margin: 0px;">
+    <!--Área de menu da aplicação -->
+    <nav id="menu" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/"><span id="logoBrand"><i class="fas fa-brain "></i> MTPIC <br> <span style="
+			font-size: 8pt;
+		">Mineração
+                    de texto para identificação de conteudos</span> </span></a>
+
+
+    </nav>
+
+    <div class="margemMinima">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="container">
+            <div class="row">
+                    {% csrf_token %}
+                <div class="col-12 col-xs-3 col-sm-4 " align="center">
+                    <div class="botao"><label class="form-control label legenda">Idioma em Portugûes</label><br /><img
+                            class="img-fluid imagem" id="portugues"  src="{% static 'img/portugues.png'%}" /></div>
+                </div>
+                <div class="col-12 col-xs-3  col-sm-4 "  align="center">
+                    <div class="botao"><label class="form-control label legenda">Language in English</label><br /><img
+                            class="img-fluid imagem" id="english" src="{% static 'img/english.png'%}" /></div>
+                </div>
+                <div class="col-12 col-xs-3  col-sm-4 "  align="center">
+                    <div class="botao"><label class="form-control label legenda">Idioma en español</label><br /><img
+                            class="img-fluid imagem" id="español" src="{% static 'img/español.png'%}" /></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--MODAL-->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal" id="loading" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="loader"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

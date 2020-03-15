@@ -1,0 +1,80 @@
+
+<!--Carrega o template padrão-->
+{% extends 'layout.html' %}
+
+<!--Bloco para inserir titulo da página-->
+{% block titulo%}MTPIC - Lematizador {% endblock %}
+
+<!--Bloco para inserir subTitulo da página-->
+{% block subTitulo%} Lematizador {% endblock%}
+
+<!--Realiza o  carregamento da pasta static-->
+{% load static %}
+
+<!--Realiza o  carregamento dos arquivos css-->
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/comum.css' %}" />
+{% endblock %}
+
+<!--Bloco para inserção do conteudo da página-->
+{% block content %}
+<BR /> <BR /> <BR /> <BR /> <BR />
+
+<!--Bloco para Descrição do processo que essa página realzia-->
+<div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+<h5>
+<span href="#" class="itemLista">Lematização</span>
+</h5>
+<p class="tb1">Esse módulo é responsável por realizar o processo
+  de transformação das palavras em sua forma de dicionário, isso
+  permite que o texto possa ser analisado mais corretamente pois não
+  teremos redundancias de palavras iguais mas que aparecem escritas de
+  forma diferente, como tempos verbais, plural e etc.</p>
+</div>
+
+
+<BR />
+<form action="" method="post">
+
+     <label for="texto">Insira abaixo o texto que deseja realizar o processo de Lemmatization:</label>
+  <textarea class="form-control" rows="5" id="texto" name="texto"></textarea>
+    {% csrf_token %}
+    <br>
+    <input type="button" class="btn btn-success" value="Processar" name="processar" id="processar">
+</form>
+
+<br/>
+
+
+<label for="resultado">Resultado do texto processado:</label>
+<div id="resultado" class="col-sm-12 resultado">
+<br/>
+<span id="textoProcessado"></span>
+<br/><br/>
+</div>
+
+<script>
+        $("#processar").click(function () {
+          $("body").css("cursor", "progress");
+          $('#loading').modal({backdrop: 'static', keyboard: false});
+          
+          var texto = $("#texto").val();
+          $.ajax({
+            url: '/processaLemmatization/',  
+            type:'POST',
+            data: {
+              'texto': texto
+            },
+            dataType: 'json',
+            success: function (data) {
+                $("#textoProcessado").html(data.texto);
+            }
+          }).done(function(data){
+            $("#loading").modal('hide');
+            $("body").css("cursor", "default");
+                
+          });
+    
+        });
+      </script>
+{% endblock %}

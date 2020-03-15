@@ -1,0 +1,75 @@
+
+<!--Carrega o template padrão-->
+{% extends 'layout_en.html' %}
+
+<!--Bloco para inserir titulo da página-->
+{% block titulo%}MTPIC - StopWords {% endblock %}
+
+{% block subTitulo%} StopWords {% endblock%}
+
+<!--Realiza o  carregamento da pasta static-->
+{% load static %}
+
+<!--Realiza o  carregamento dos arquivos css-->
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/comum.css' %}" />
+{% endblock %}
+
+<!--Bloco para inserção do conteudo da página-->
+{% block content %}
+<BR /> <BR /> <BR /> <BR /> <BR />
+
+<!--Bloco para Descrição do processo que essa página realzia-->
+<div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+<h5>
+<span href="#" class="itemLista">StopWords Removal</span>
+</h5>
+<p class="tb1">This module is responsible for cleaning words in text that have no semantic meaning, thus making the text cleaner for processing.</p>
+</div>
+
+
+<BR />
+<form action="" method="post">
+
+     <label for="texto">Enter below the text that you want to carry out the StopWords Removal process:</label>
+  <textarea class="form-control" rows="5" id="texto" name="texto"></textarea>
+    {% csrf_token %}
+    <br>
+    <input type="button" class="btn btn-success" value="Process" name="processar" id="processar">
+</form>
+
+<br/>
+
+
+<label for="resultado">Result of the processed text:</label>
+<div id="resultado" class="col-sm-12 resultado">
+<br/>
+<span id="textoProcessado"></span>
+<br/><br/>
+</div>
+
+<script>
+        $("#processar").click(function () {
+          $("body").css("cursor", "progress");
+          $('#loading').modal({backdrop: 'static', keyboard: false});
+          
+          var texto = $("#texto").val();
+          $.ajax({
+            url: '/processaStopWords/',  
+            type:'POST',
+            data: {
+              'texto': texto
+            },
+            dataType: 'json',
+            success: function (data) {
+                $("#textoProcessado").html(data.texto);
+            }
+          }).done(function(data){
+            $("#loading").modal('hide');
+            $("body").css("cursor", "default");
+                
+          });
+    
+        });
+      </script>
+{% endblock %}

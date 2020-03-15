@@ -1,0 +1,97 @@
+{% extends 'layout_en.html' %}
+
+{% block titulo%}MTPIC Mineração de Textos{% endblock%}
+
+
+{% block content%}
+
+
+
+<div id="divTopo" class="col-sm-10 offset-sm-1">
+	<BR /> <BR /> <BR /> <BR /> <BR />
+
+	<H2>
+		Welcome to MTPIC! <BR /> <BR /> Text Mining for
+		Identification of Contents.
+	</H2>
+
+	<BR />
+</div>
+
+<BR />
+<BR />
+
+<div>
+
+	<H4> What does this system do? </H4>
+	<div class='col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos'>
+		<p> The main purpose of this system is to allow the extraction of content from a text with its concepts and display
+			them in the form of graphs. </p>
+	</div>
+</div>
+
+<BR />
+<BR />
+
+<div>
+	<H4> How is this done? </H4>
+	<div class='col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos'>
+		<p> Through the use of text mining techniques, data mining preprocessing text and some mathematical algorithms, it is
+			possible to perform such operations of pattern identification and text comparison. </p>
+	</div>
+</div>
+
+<BR />
+<BR />
+
+<div>
+	<H4> How is this system divided? </H4>
+	<div class='col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos'>
+		<p> The system is subdivided into modules to facilitate reuse and understanding of how the entire process is
+			performed. So we have the following modules: </p>
+		<BR />
+
+		<h5>
+			<a href="#" class="itemLista"> ● Tokenizer </a>
+		</h5>
+		<p class="tb1"> This module is responsible for transforming text into a group of tokens (a word-for-word array), so
+			later methods can more easily process that text. </p>
+		<h5>
+			<a href="#" class="itemLista"> ● StopWords Removal</a>
+		</h5>
+		<p class="tb1"> This module is responsible for cleaning words in text that have no semantic meaning, thus making the
+			text cleaner for processing. </p>
+		<h5>
+			<a href="#" class="itemLista"> ● Stemming </a>
+		</h5>
+		<p class="tb1"> This module is responsible for performing the process of stemization of words that consists of
+			obtaining the root form, that is, the character set responsible for giving rise to that word.
+			<BR />
+			<h5>
+				<a href="#" class="itemLista"> ● Central Theme Extractor </a>
+			</h5>
+			<p class="tb1"> This module allows the identification of the central theme of a given text, using the above modules
+				together with a knowledge base trained with data from Wikipédia. </p>
+			<BR />
+			<h5>
+				<a href="#" class="itemLista"> ● Concept Extractor </a>
+			</h5>
+			<p class="tb1"> This module allows the identification of the possible concepts of a certain part of a text, the same
+				strategy of obtaining a central theme. </p>
+			<BR />
+			<h5>
+				<a href="#" class="itemLista"> ● Complete Miner </a>
+			</h5>
+			<p class="tb1"> This is the complete system that integrates all the modules above, making it possible to
+				identification of the central theme of a text, the identification of the concepts present in it and the display in
+				the form of
+				Graphs. </P>
+			<BR>
+			<h5>
+				<a href="#" class="itemLista"> ● View Processed Data </a>
+			</h5>
+			<p class="tb1"> Through this module it is possible to search for data that has already been processed and is stored
+				in the application database. </p>
+	</div>
+</div>
+{% endblock%}

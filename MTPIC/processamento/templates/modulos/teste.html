@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+
+<!--Bloco para inserção do conteudo da página-->
+{% block content %}
+<br><br><br><br>
+<form name="formulario" id="formulario">
+        {% csrf_token %}
+    <input type="file" name="myfile" />
+    <div class="col-4">
+        <input type="button" class="btn btn-success" value="Processar" name="processar" id="processar">
+      </div>
+</form>
+
+<script>
+  $("#processar").click(function () {
+    var form = $('#formulario'),
+    fd = new FormData(form[0]);
+    $.ajax({
+      url: '/processaTeste/',
+      type: 'POST',
+      contentType: false,  
+      processData: false,        
+      data: fd,
+      dataType: 'json',
+      success: function (data) {
+        alert("Funcionou\n\n"+data.texto);
+      }, timeout: 100000
+    }).done(function (data) {
+
+    });
+    });    
+</script>
+{%endblock%}

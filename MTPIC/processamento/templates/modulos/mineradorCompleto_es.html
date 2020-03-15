@@ -1,0 +1,137 @@
+<!--Carrega o template padrão-->
+{% extends 'layout_es.html' %}
+
+<!--Bloco para inserir titulo da página-->
+{% block titulo%}MTPIC - Minerador Completo {% endblock %}
+
+<!--Bloco para inserir subTitulo da página-->
+{% block subTitulo%} Minerador Completo {% endblock%}
+
+<!--Realiza o  carregamento da pasta static-->
+{% load static %}
+
+<!--Realiza o  carregamento dos arquivos css-->
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/comum.css' %}" />
+
+<link rel="stylesheet" href="{% static 'css/vis.min.css' %}" />
+{% endblock %}
+
+{% block scripts%}
+<script src="{% static 'js/vis.min.js' %}"></script>
+<script src="{% static 'js/mineradorCompleto_es.js' %}"></script>
+{% endblock%}
+
+<!--Bloco para inserção do conteudo da página-->
+{% block content %}
+
+<BR /> <BR /> <BR /> <BR /> <BR />
+<div id="processarNovamente">
+  <div class="col-4">
+    <input type="button" class="btn btn-success" value="Realizar nueva búsqueda" name="novaBusca" id="novaBusca">
+    <br>
+    <br>
+    <h5>
+      <span href="#" class="itemLista">Resultado Procesamiento:</span>
+    </h5>
+  </div>
+</div>
+<div id="dadosForumlario">
+  <div id="dadosTopo">
+    <div class="row">
+      <div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+        <h5>
+          <span href="#" class="itemLista">Minerador Completo</span>
+        </h5>
+        <p class="tb1">Este módulo permite realizar la extracción del tema central de un texto, sus contenidos y visualizar los datos extraídos en la estructura de grafos.</p>
+      </div>
+
+
+    </div>
+
+    <BR />
+
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <!--Bloco para Descrição do processo que essa página realzia-->
+        <form id="formulario" name="formulario" action="" method="post">
+            {% csrf_token %}
+      
+            <label for="formaBusca">Forma de búsqueda</label>
+            <select class="form-control" name="formaBusca" id="formaBusca">
+              <option value="nenhum" selected disabled>Seleccionar...</option>
+              <option value="Texto">Texto</option>
+              <option value="Link">Enlace</option>
+              <option value="Arquivo">Expediente(IMAGEN,PDF,TXT,DOCX,PPTX)</option>
+      
+            </select>
+
+          <div id="campos">
+
+          </div>
+          <div class="row">
+            <div class="col-12">
+             <label for="taxaAceitacao">Tasa de asertividad </label>
+            <select class="form-control" name="taxaAceitacao" id="qtdTermos">
+              <option value=95 selected>95%</option>
+              <option value=94>94%</option>
+              <option value=93>93%</option>
+              <option value=92>92%</option>
+              <option value=91>91%</option>
+              <option value=90>90%</option>
+              <option value=89>89%</option>
+              <option value=87>88%</option>
+              <option value=86>87%</option>
+              <option value=85>86%</option>
+              <option value=84>85%</option>
+  
+            </select>
+            </div>
+            <div class="col-12" style="display:none">
+              <label for="euristicaProcessamento">Euristica</label>
+              <select class="form-control" name="euristicaProcessamento" id="qtdTermos">
+                <option value=1 selected>Considerar 1º tema e trazer similares</option>
+                <option value=2>Buscar entre os 10 primeiros e trazer os mais similares ao texto</option>
+                <option value=3>Combinar as duas</option>
+              </select>
+            </div>
+          </div>
+          <br>
+
+          <div class="col-4">
+            <input type="button" class="btn btn-success" value="Proceso" name="processar" id="processar">
+          </div>
+      </div>
+      </form>
+
+
+    </div>
+
+  </div>
+</div>
+<div id="agrupaResultados">
+  <label for="resultado">Resultado en forma de grafos:</label>
+  <br>
+  <br>
+  <div id="mynetwork"></div>
+  <label for="resultado">Resultado del texto procesado:</label>
+  <br>
+  <br>
+  <div class="row">
+
+    <div id="resultado" class="col-sm-12 col-lg-5 resultado">
+      <h3 align="center">Tema Central</h3>
+      <span id="temaCentral"><i>Ningún dato procesado</i></span>
+
+    </div>
+
+    <div id="resultadoSub" class="col-sm-12  col-lg-5 offset-lg-1 resultado">
+      <h3 align="center">Conceptos</h3>
+      <span id="subTema"><i>Ningún dato procesado</i></span>
+
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}

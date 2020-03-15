@@ -1,0 +1,75 @@
+
+<!--Carrega o template padrão-->
+{% extends 'layout_es.html' %}
+
+<!--Bloco para inserir titulo da página-->
+{% block titulo%}MTPIC - StopWords {% endblock %}
+
+{% block subTitulo%} StopWords {% endblock%}
+
+<!--Realiza o  carregamento da pasta static-->
+{% load static %}
+
+<!--Realiza o  carregamento dos arquivos css-->
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/comum.css' %}" />
+{% endblock %}
+
+<!--Bloco para inserção do conteudo da página-->
+{% block content %}
+<BR /> <BR /> <BR /> <BR /> <BR />
+
+<!--Bloco para Descrição do processo que essa página realzia-->
+<div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+<h5>
+<span href="#" class="itemLista">Eliminación de StopWords</span>
+</h5>
+<p class="tb1">Este módulo es responsable de realizar la limpieza de palabras en el texto que no tienen significado semántico, haciendo así el texto más limpio para su procesamiento.</p>
+</div>
+
+
+<BR />
+<form action="" method="post">
+
+     <label for="texto">Introduzca el texto que desea realizar el proceso de eliminación de StopWords:</label>
+  <textarea class="form-control" rows="5" id="texto" name="texto"></textarea>
+    {% csrf_token %}
+    <br>
+    <input type="button" class="btn btn-success" value="Proceso" name="processar" id="processar">
+</form>
+
+<br/>
+
+
+<label for="resultado">Resultado del texto procesado:</label>
+<div id="resultado" class="col-sm-12 resultado">
+<br/>
+<span id="textoProcessado"></span>
+<br/><br/>
+</div>
+
+<script>
+        $("#processar").click(function () {
+          $("body").css("cursor", "progress");
+          $('#loading').modal({backdrop: 'static', keyboard: false});
+          
+          var texto = $("#texto").val();
+          $.ajax({
+            url: '/processaStopWords/',  
+            type:'POST',
+            data: {
+              'texto': texto
+            },
+            dataType: 'json',
+            success: function (data) {
+                $("#textoProcessado").html(data.texto);
+            }
+          }).done(function(data){
+            $("#loading").modal('hide');
+            $("body").css("cursor", "default");
+                
+          });
+    
+        });
+      </script>
+{% endblock %}

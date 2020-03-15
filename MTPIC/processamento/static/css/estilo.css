@@ -1,0 +1,71 @@
+body{
+	font-family: consolas;
+	padding: 10px;
+	background-color:  #343a40 !important;
+	color:#eeeeee !important;
+}
+
+.subTitulo{
+	text-align: center;
+	font-size: 15pt;
+	font-weight: 800;
+	text-shadow:  2px 3px #0b0c0cbe
+}
+
+.margemMinima{
+	margin: 20px;
+}
+
+/*Barra de rolagem*/
+::-webkit-scrollbar-track {
+    background-color: #FEFEFE;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background: #23272b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #23272b;
+}
+
+
+#menu{
+	background-color:  #23272b!important;
+
+}
+
+#logoBrand{
+	font-size: 30pt;
+	text-shadow:  2px 4px #0b0c0c
+}
+
+#divTopo{
+	text-align: center;
+			
+}
+
+.descritivos{
+	text-align: justify;
+} 
+.sublinhado{
+	    text-decoration: underline;
+}
+
+.tb1{
+	margin-left: 50px;
+}
+
+.itemLista{
+		color:#eeeeee ;
+}
+
+.itemLista:hover{
+		color:#ffffff ;
+}
+
+.dropdown-item:hover{
+	background-color: #969a9e;
+	color:#eeeeee ;
+}

@@ -1,0 +1,180 @@
+<!--Carrega o template padrão-->
+{% extends 'layout.html' %}
+
+<!--Bloco para inserir titulo da página-->
+{% block titulo%}MTPIC - Extrator Tema Central {% endblock %}
+
+<!--Bloco para inserir subTitulo da página-->
+{% block subTitulo%} Extrator Tema Central {% endblock%}
+
+<!--Realiza o  carregamento da pasta static-->
+{% load static %}
+
+<!--Realiza o  carregamento dos arquivos css-->
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/comum.css' %}" />
+{% endblock %}
+
+<!--Bloco para inserção do conteudo da página-->
+{% block content %}
+
+<BR /> <BR /> <BR /> <BR /> <BR />
+<div class="row">
+  <div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+    <h5>
+      <span href="#" class="itemLista">Extrator de Tema Central</span>
+    </h5>
+    <p class="tb1">Esse módulo permite realizar a identificação do
+      tema central de um determinado texto, através da utilização da base
+      de conceitos do wikipédia.</p>
+  </div>
+
+
+</div>
+
+<BR />
+
+<div class="row">
+  <div class="col-12 col-lg-6">
+    <!--Bloco para Descrição do processo que essa página realzia-->
+
+    <form id="formulario" name="formulario" action="" method="post">
+      {% csrf_token %}
+
+      <label for="formaBusca">Forma de Busca</label>
+      <select class="form-control" name="formaBusca" id="formaBusca">
+        <option value="nenhum" selected disabled>Selecione...</option>
+        <option value="Texto">Texto</option>
+        <option value="Link">Link</option>
+        <option value="Arquivo">Arquivo(IMAGEM,PDF,TXT,DOCX,PPTX)</option>
+
+      </select>
+
+      <div id="campos">
+
+      </div>
+
+      <br>
+
+
+
+      <div class="row">
+        <div class="col-12">
+          <label for="taxaAceitacao">Taxa de assertividade: </label>
+          <select class="form-control" name="taxaAceitacao" id="qtdTermos">
+            <option value=95 selected>95%</option>
+            <option value=94>94%</option>
+            <option value=93>93%</option>
+            <option value=92>92%</option>
+            <option value=91>91%</option>
+            <option value=90>90%</option>
+            <option value=89>89%</option>
+            <option value=87>88%</option>
+            <option value=86>87%</option>
+            <option value=85>86%</option>
+            <option value=84>85%</option>
+
+          </select>
+        </div>
+        <div class="col-12" style="display:none">
+          <label for="euristicaProcessamento">Euristica</label>
+          <select class="form-control" name="euristicaProcessamento" id="qtdTermos">
+            <option value=1 selected>Considerar 1º tema e trazer similares</option>
+            <option value=2>Buscar entre os 10 primeiros e trazer os mais similares ao texto</option>            
+            <option value=3>Combinar as duas</option>
+          </select>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+
+        <div class="col-4">
+          <input type="button" class="btn btn-success" value="Processar" name="processar" id="processar">
+        </div>
+      </div>
+    </form>
+
+
+  </div>
+  <div class="col-12 col-lg-6">
+    <label for="resultado">Resultado do texto processado:</label>
+    <div id="resultado" class="col-sm-12 resultado">
+      <br />
+      <span id="textoProcessado"><i>Nenhum dado pocessado</i></span>
+
+    </div>
+  </div>
+</div>
+<script>
+
+
+  $("#formaBusca").change(function () {
+    switch ($("#formaBusca").val()) {
+      case "Texto":
+        $("#campos").html("<br><label for='texto'>Insira abaixo o texto que deseja processar:</label>" +
+          "<textarea class='form-control' rows='5' id='texto' name='texto'></textarea>")
+        break;
+      case "Link": $("#campos").html("<br> <label for='link'>Insira o link que deseja processar</label> <input type='input' class='form-control' id='link' name='link' placeholder='Insira o link'>"); break;
+      case "Arquivo": $("#campos").html("<br> <label for='arquivo'>Selecione o arquivo que deseja processar</label> <input type='file' class='form-control-file' name='arquivo' accept='.docx,.dotx,.pdf,.txt,.pptx,.jpg,.jpeg,.png,.jpe,.tif,.tiff,.bmp'>"); break;
+
+    }
+  });
+
+  $("#processar").click(function () {
+
+
+    var formaBusca = $("#formaBusca").val();
+    processa = true
+    switch (formaBusca) {
+      case "Texto":
+        break;
+      case "Link":
+        break;
+      case "Arquivo":
+        break;
+      default: processa = false
+    };
+
+    if (processa) {
+      $("body").css("cursor", "progress");
+      $('#loading').modal({ backdrop: 'static', keyboard: false });
+      var form = $('#formulario'),
+        fd = new FormData(form[0]);
+      $.ajax({
+        url: '/processaTemaCentral/',
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        data: fd,
+        dataType: 'json',
+        success: function (data) {
+          //Cria tabela com retorno do resultado
+          dados = data.texto.split(/\|@@##@@\|/g);
+
+          retorno = "<table class='table'><tr><th >Termo</th><th>Tema encontrado</th><th>Proximidade</th></tr>";
+
+          $.each(dados, function (index, linhas) {
+            colunas = linhas.replace(/\n/g, "").split(/\|@@#_#@@\|/g);
+
+            if (colunas[0] > 0) {
+              retorno += "<tr><td>" + colunas[0] + "</td><td>" + colunas[1].toString().replace("_", " ") + "</td><td>" + (parseFloat(colunas[2]) * 100).toFixed(3) + "%" + "</td></tr>";
+            }
+          });
+          retorno += "</table>";
+          $("#textoProcessado").html(retorno);
+          $('html, body').animate({ scrollTop: $('#resultado').offset().top }, 'slow');
+        }, timeout: 100000
+      }).done(function (data) {
+        $("#loading").modal('hide');
+        $("body").css("cursor", "default");
+
+      });
+
+    }
+    else {
+      alert("Selecione uma opção para processar");
+    }
+  });
+</script>
+{% endblock %}

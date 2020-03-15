@@ -1,0 +1,145 @@
+<!--Carrega o template padrão-->
+{% extends 'layout_es.html' %}
+
+<!--Bloco para inserir titulo da página-->
+{% block titulo%}MTPIC - Extrator Conceitos {% endblock %}
+
+<!--Bloco para inserir subTitulo da página-->
+{% block subTitulo%} Extrator Conceitos {% endblock%}
+
+<!--Realiza o  carregamento da pasta static-->
+{% load static %}
+
+<!--Realiza o  carregamento dos arquivos css-->
+{% block estilos %}
+<link rel="stylesheet" href="{% static 'css/comum.css' %}" />
+{% endblock %}
+
+<!--Bloco para inserção do conteudo da página-->
+{% block content %}
+
+<BR /> <BR /> <BR /> <BR /> <BR />
+<div class="row">
+  <div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+    <h5>
+      <span href="#" class="itemLista">Extrator Conceitos</span>
+    </h5>
+    <p class="tb1">Este módulo realiza o processo da extração dos conceitos presentes em um texto.</p>
+  </div>
+
+
+</div>
+
+<BR />
+
+<div class="row">
+  <div class="col-12 col-lg-6">
+    <!--Bloco para Descrição do processo que essa página realzia-->
+
+    <form id="formulario" name="formulario" action="" method="post">
+        {% csrf_token %}
+  
+        <label for="formaBusca">Forma de búsqueda</label>
+        <select class="form-control" name="formaBusca" id="formaBusca">
+          <option value="nenhum" selected disabled>Seleccionar...</option>
+          <option value="Texto">Texto</option>
+          <option value="Link">Enlace</option>
+          <option value="Arquivo">Expediente(IMAGEN,PDF,TXT,DOCX,PPTX)</option>
+  
+        </select>
+  
+      <div id="campos">
+
+      </div>
+
+      <br>
+
+        <div class="col-4">
+          <input type="button" class="btn btn-success" value="Proceso" name="processar" id="processar">
+        </div>
+      </div>
+    </form>
+
+
+  </div>
+  <div class="col-12 col-lg-6">
+      <label for="resultado">Resultado del texto procesado:</label>
+      <div id="resultado" class="col-sm-12 resultado">
+        <br />
+        <span id="textoProcessado"><i>Ningún dato procesado</i></span>
+  
+    </div>
+  </div>
+</div>
+<script>
+
+
+  $("#formaBusca").change(function () {
+    switch ($("#formaBusca").val()) {
+      case "Texto":
+          $("#campos").html("<br><label for='texto'>Introduzca el texto que desea procesar:</label>" +
+            "<textarea class='form-control' rows='5' id='texto' name='texto'></textarea>")
+          break;
+        case "Link": $("#campos").html("<br> <label for='link'>Introduzca el enlace que desea procesar</label> <input type='input' class='form-control' id='link' name='link' placeholder='Insira o link'>"); break;
+        case "Arquivo": $("#campos").html("<br> <label for='arquivo'>Seleccione el archivo que desea procesar</label> <input type='file' class='form-control-file' name='arquivo' accept='.docx,.dotx,.pdf,.txt,.pptx,.jpg,.jpeg,.png,.jpe,.tif,.tiff,.bmp'>"); break;
+  
+    }
+  });
+
+  $("#processar").click(function () {
+
+
+    var formaBusca = $("#formaBusca").val();
+    processa = true
+    switch (formaBusca) {
+      case "Texto":
+        break;
+      case "Link":
+        break;
+      case "Arquivo":
+        break;
+      default: processa = false
+    };
+
+    if (processa) {
+      $("body").css("cursor", "progress");
+      $('#loading').modal({ backdrop: 'static', keyboard: false });
+      var form = $('#formulario'),
+        fd = new FormData(form[0]);
+      $.ajax({
+        url: '/processasubTema/',
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        data: fd,
+        dataType: 'json',
+        success: function (data) {
+          //Cria tabela com retorno do resultado
+          dados = data.texto.split(/\|@@##@@\|/g);
+
+            retorno ="<table class='table'><tr><th >Plazo</th><th>Tema encontrado</th><th>Proximidad</th></tr>";
+
+          $.each(dados, function (index, linhas) {
+            colunas = linhas.replace(/\n/g, "").split(/\|@@#_#@@\|/g);
+
+            if (colunas[0] > 0) {
+              retorno += "<tr><td>" + colunas[0] + "</td><td>" + colunas[1].toString().replace("_", " ") + "</td><td>" + (parseFloat(colunas[2]) * 100).toFixed(3) + "%" + "</td></tr>";
+            }
+          });
+          retorno += "</table>";
+          $("#textoProcessado").html(retorno);
+          $('html, body').animate({ scrollTop: $('#resultado').offset().top }, 'slow');
+        }, timeout: 100000
+      }).done(function (data) {
+        $("#loading").modal('hide');
+        $("body").css("cursor", "default");
+
+      });
+
+    }
+    else {
+      alert("Seleccione una opción para procesar");
+    }
+  });
+</script>
+{% endblock %}

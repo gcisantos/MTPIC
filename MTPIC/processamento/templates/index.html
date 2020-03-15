@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+
+{% block titulo%}MTPIC Mineração de Textos{% endblock%}
+
+
+{% block content%}
+
+
+
+<div id="divTopo" class="col-sm-10 offset-sm-1">
+	<BR /> <BR /> <BR /> <BR /> <BR />
+
+	<H2>
+		Bem vindo ao MTPIC ! <BR /> <BR /> Mineração de Texto para
+		Identificação de Conteúdos.
+	</H2>
+
+	<BR />
+</div>
+
+<BR />
+<BR />
+
+<div>
+	<H4>O que esse sistema faz?</H4>
+	<div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+		<p>O principal objetivo desse sistema é permitir que seja possivel a extração de conteúdo de um texto junto aos seus
+			conceitos e exibir os mesmos em forma de grafos.</p>
+	</div>
+</div>
+
+<BR />
+<BR />
+
+<div>
+	<H4>Como isso é feito?</H4>
+	<div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+		<p>Através da utilização de técnicas de mineração de texto, mineração de dados pré-processamento de texto e alguns
+			algoritmos matemáticos é possivel realizar essas operações de identificação de padrões e comparação em texto.</p>
+	</div>
+</div>
+
+<BR />
+<BR />
+
+<div>
+	<H4>De que forma esse sistema é dividido?</H4>
+	<div class="col-xs-11 col-sm-10 col-md-9 col-lg-9 descritivos">
+		<p>O sistema está subdividido em módulos para facilitar a reutilização e o entendimento de como todo o processo é
+			realizado. Sendo assim temos os seguintes módulos:</p>
+		<BR />
+		<h5>
+			<a href="#" class="itemLista">● Tokenizer</a>
+		</h5>
+		<p class="tb1">Esse módulo é responsável por transformar o texto em um grupo de tokens(um array de palavra por
+			palavra), dessa forma métodos posteriores podem processar mais facilmente esse texto.</p> <BR />
+		<h5>
+			<a href="#" class="itemLista">● Remoção de StopWords</a>
+		</h5>
+		<p class="tb1">Esse módulo é responsável por realizar a limpeza de palavras no texto que não possuem significado
+			semnâtico, tornando assim o texto mais limpo para o seu processamento.</p> <BR />
+		<h5>
+			<a href="#" class="itemLista">● Stemização</a>
+		</h5>
+		<p class="tb1">Esse módulo é responsável por realizar o processo de stemização das palavras que consiste em obter a
+			forma raiz, ou seja, o conjunto de caracteres responsável por dar origem aquela palavra.</p>
+		<BR />
+		<h5>
+			<a href="#" class="itemLista">● Extrator de Tema Central</a>
+		</h5>
+		<p class="tb1">Esse módulo permite realizar a identificação do tema central de um determinado texto, através da
+			utilização dos modulos acima em conjunto com uma base de conhecimento treinada com dados do wikipédia.</p>
+		<BR />
+		<h5>
+			<a href="#" class="itemLista">● Extrator de Conceitos</a>
+		</h5>
+		<p class="tb1">Esse módulo permite realizar a identificação dos possivéis conceitos de um determinado trecho de um
+			texto, a mesma estratégia da obtenção de tema central.</p>
+		<BR />
+		<h5>
+			<a href="#" class="itemLista">● Minerador Completo</a>
+		</h5>
+		<p class="tb1">Esse é o sistema completo que realiza a integração de todos os módulos acima, tornando possivel a
+			identificação do tema central de um texto, a identificação dos conceitos presentes no mesmo e a exibição em forma de
+			Grafos.</p>
+		<BR>
+		<h5>
+			<a href="#" class="itemLista">● Visualizar Dados Processados</a>
+		</h5>
+		<p class="tb1">Através desse módulo é possivel buscar dados que já foram processados e estão armazenados na base de
+			dados da aplicação.</p>
+	</div>
+</div>
+{% endblock%}
